@@ -1,9 +1,11 @@
-ENV["RAILS_ENV"] ||= "test"
-require_relative "../config/environment"
-require "rails/test_help"
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
 
 module ActiveSupport
   class TestCase
+    ActiveRecord::Migration.maintain_test_schema!
+
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)
 
