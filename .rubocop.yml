@@ -48,5 +48,6 @@ Rails/ToSWithArgument:
 Rails/LexicallyScopedActionFilter:
   Enabled: false
 
-Layout/ElseAlignment:
-  EnforcedStyleAlignWith: if
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always

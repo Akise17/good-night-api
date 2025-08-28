@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: trackings
@@ -12,6 +14,7 @@
 #
 # Indexes
 #
+#  index_trackings_on_clock_out_time  (clock_out_time)
 #  index_trackings_on_created_at      (created_at)
 #  index_trackings_on_sleep_duration  (sleep_duration)
 #  index_trackings_on_user_id         (user_id)
