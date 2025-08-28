@@ -33,11 +33,8 @@ class Api::V1::BaseController < ApplicationController
 
   def set_resources
     model_class = service_name.constantize
-    associations = model_class.reflect_on_all_associations.reject do |association|
-      association.options[:polymorphic]
-    end.map(&:name)
 
-    @resources = model_class.includes(associations).joins(associations).all
+    @resources = model_class
   end
 
   def set_resource
@@ -49,8 +46,8 @@ class Api::V1::BaseController < ApplicationController
   end
 
   def set_default_pagination
-    params[:page] = params[:page] || 1
-    params[:per_page] = params[:per_page] || 10
+    params[:page] ||= 1
+    params[:per_page] ||= 10
   end
 
   def render_response(data = nil)

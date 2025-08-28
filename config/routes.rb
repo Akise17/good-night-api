@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :users, only: %i[ index show create update destroy]
-      resources :trackings, only: %i[ index show create update destroy] do
+      resources :follows, only: [] do
+        member do
+          post 'follow'
+          delete 'unfollow'
+        end
+      end
+      resources :trackings, only: %i[index show destroy] do
         collection do
           post 'clock_in'
         end
@@ -10,6 +15,7 @@ Rails.application.routes.draw do
           put 'clock_out'
         end
       end
+      resources :users, only: %i[index show create update destroy]
     end
   end
 

@@ -6,6 +6,10 @@ en:
           attributes:
             base:
               completed: tracking already completed
+        follow:
+          attributes:
+            base:
+              cannot_self_follow: cannot follow yourself
   exceptions:
     unauthorized: your request not autorized
     record_invalid: record invalid
