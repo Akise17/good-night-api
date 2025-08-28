@@ -83,3 +83,9 @@ localhost:3000
 ```
 Postman Collection API documentation:
 https://documenter.getpostman.com/view/18203091/2sB3HgQP7w
+
+## 🚀 Production
+You can test on Our production env deployed on AWS region singapore
+```bash
+https://good-night.iotaku.tech/api/v1
+```
