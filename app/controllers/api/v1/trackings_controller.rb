@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::TrackingsController < Api::V1::BaseController
-  before_action :set_resource, only: %i[clock_out]
+  before_action :set_resource, only: %i[clock_out show destroy]
 
   def clock_in
     @resource = current_user.trackings.new

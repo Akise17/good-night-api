@@ -25,8 +25,12 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+with_clock_out_time: 
+  user: budi
+  clock_in_time: <%= 1.hour.ago %>
+  clock_out_time: <%= Time.current %>
+  sleep_duration: <%= (Time.current - 1.hour.ago).to_i %>
+
+without_clock_out_time: 
+  user: budi
+  clock_in_time: <%= 1.hour.ago %>
