@@ -1,5 +1,4 @@
 class Api::V1::BaseController < ApplicationController
-  include ApiExceptionHandler
   include ApiResponseHandler
 
   before_action :set_resources, only: %i[index]
@@ -56,12 +55,12 @@ class Api::V1::BaseController < ApplicationController
 
   def render_response(data = nil)
     data ||= @resource || @resources
-    serializer = "#{service_name.pluralize}::#{data.is_a?(ActiveRecord::Relation) ? 'Detail' : 'Index'}"
+    serializer = "#{service_name.pluralize}::#{data.is_a?(ActiveRecord::Relation) ? 'Index' : 'Detail'}"
 
     render_json(
       data: data,
       serializer: serializer,
-      message: "#{action_name.capitalize} #{service_name}"
+      message: "#{action_name.capitalize.humanize} #{service_name}"
     )
   end
 

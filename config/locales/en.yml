@@ -1,4 +1,11 @@
 en:
+  activerecord:
+    errors:
+      models:
+        tracking:
+          attributes:
+            base:
+              completed: tracking already completed
   exceptions:
     unauthorized: your request not autorized
     record_invalid: record invalid

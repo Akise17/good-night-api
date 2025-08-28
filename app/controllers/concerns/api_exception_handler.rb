@@ -3,6 +3,8 @@
 module ApiExceptionHandler
   extend ActiveSupport::Concern
 
+  Unauthorized = Class.new(StandardError)
+
   included do
     EXCEPTIONS = {
       'NotFound' => { status: :not_found, code: 'NOT_FOUND',

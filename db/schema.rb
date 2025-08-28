@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_28_005048) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_28_031742) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "trackings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "clock_in_time"
+    t.datetime "clock_out_time"
+    t.integer "sleep_duration", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_trackings_on_created_at"
+    t.index ["sleep_duration"], name: "index_trackings_on_sleep_duration"
+    t.index ["user_id"], name: "index_trackings_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
@@ -20,4 +32,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_28_005048) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_users_on_name"
   end
+
+  add_foreign_key "trackings", "users"
 end
