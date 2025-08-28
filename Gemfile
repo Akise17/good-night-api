@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'active_model_serializers', '~> 0.10.0'
 gem 'bootsnap', require: false
 gem 'importmap-rails'
 gem 'pg', '~> 1.1'
@@ -9,6 +10,7 @@ gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[ windows jruby ]
+gem 'will_paginate'
 
 group :development, :test do
   gem 'brakeman', require: false
