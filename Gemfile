@@ -14,13 +14,13 @@ gem 'will_paginate'
 
 group :development, :test do
   gem 'brakeman', require: false
+  gem 'byebug'
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
   gem 'rubocop-rails-omakase', require: false
 end
 
 group :development do
   gem 'annotate'
-  gem 'byebug'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
