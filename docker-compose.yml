@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: skippr
+      POSTGRES_PASSWORD: skippr
+      POSTGRES_DB: good_night_api_development
+    volumes:
+      - store:/var/lib/postgresql/data
+
+    ports:
+      - "6533:5432"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: good_night_app_api
+    command: ./bin/rails server -b 0.0.0.0
+    links:
+      - db
+    volumes:
+      - .:/app
+      - bundle:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      DB_PORT: 5432
+      DB_HOST: db
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+
+volumes:
+  store:
+    driver: local
+  bundle:
+    driver: local

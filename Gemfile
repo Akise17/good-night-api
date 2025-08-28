@@ -18,6 +18,7 @@ group :development, :test do
   gem 'brakeman', require: false
   gem 'byebug'
   gem 'debug', platforms: %i[ mri windows ], require: 'debug/prelude'
+  gem 'faker'
   gem 'rubocop-rails-omakase', require: false
 end
 
