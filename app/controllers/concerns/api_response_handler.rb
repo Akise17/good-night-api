@@ -3,7 +3,7 @@
 module ApiResponseHandler
   extend ActiveSupport::Concern
 
-  def render_json(data: {}, serializer: '', message: '', code: :ok, extra: {}, use_extra: false)
+  def render_json(data: {}, message: '', code: :ok, extra: {}, use_extra: false)
     json = {}
     json[:meta] = { message: }
 
@@ -16,7 +16,7 @@ module ApiResponseHandler
     end
 
     begin
-      json[:data] = use_extra ? extra : serialize(data, serializer).as_json
+      json[:data] = use_extra ? extra : serialize(data).as_json
     rescue NoMethodError
       json[:meta][:render_method] = 'general'
       json[:data] = data.as_json
@@ -27,7 +27,8 @@ module ApiResponseHandler
 
   private
 
-  def serialize(data, serializer)
+  def serialize(data)
+    serializer = "#{service_name.pluralize}::#{data.is_a?(ActiveRecord::Relation) || data.is_a?(Class) ? 'Index' : 'Detail'}"
     serializer_class = "#{serializer}Serializer".safe_constantize
     raise "#{serializer}Serializer not implemented yet" if serializer_class.nil?
 

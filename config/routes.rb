@@ -1,18 +1,21 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :follows, only: [] do
         member do
-          post 'follow'
-          delete 'unfollow'
+          post :follow
+          delete :unfollow
         end
       end
       resources :trackings, only: %i[index show destroy] do
         collection do
-          post 'clock_in'
+          get :by_followers
+          post :clock_in
         end
         member do
-          put 'clock_out'
+          put :clock_out
         end
       end
       resources :users, only: %i[index show create update destroy]

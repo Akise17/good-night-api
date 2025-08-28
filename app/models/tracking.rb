@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: trackings
@@ -12,6 +14,7 @@
 #
 # Indexes
 #
+#  index_trackings_on_clock_out_time  (clock_out_time)
 #  index_trackings_on_created_at      (created_at)
 #  index_trackings_on_sleep_duration  (sleep_duration)
 #  index_trackings_on_user_id         (user_id)
@@ -32,8 +35,22 @@ class Tracking < ApplicationRecord
 
   default_scope { order(created_at: :desc) }
 
-  scope :active, -> { where(clock_out_time: nil) }
+  scope :by_date, lambda { |range|
+    return self if range.blank?
+
+    start_date = range.split(',').first.to_date.beginning_of_day
+    end_date = range.split(',').last.to_date.end_of_day
+    where(created_at: start_date..end_date)
+  }
+
+  scope :followings_of, lambda { |user|
+    where(user: user.followings)
+  }
+
   scope :completed, -> { where.not(clock_out_time: nil) }
+
+
+  scope :by_duration, -> { reorder(sleep_duration: :desc) }
 
   def set_clock_in_time
     self.clock_in_time ||= DateTime.current

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::BaseController < ApplicationController
   include ApiResponseHandler
 
@@ -33,8 +35,11 @@ class Api::V1::BaseController < ApplicationController
 
   def set_resources
     model_class = service_name.constantize
+    associations = model_class.reflect_on_all_associations.reject do |association|
+      association.options[:polymorphic]
+    end.map(&:name)
 
-    @resources = model_class
+    @resources = model_class.includes(associations)
   end
 
   def set_resource
@@ -52,11 +57,9 @@ class Api::V1::BaseController < ApplicationController
 
   def render_response(data = nil)
     data ||= @resource || @resources
-    serializer = "#{service_name.pluralize}::#{data.is_a?(ActiveRecord::Relation) ? 'Index' : 'Detail'}"
 
     render_json(
       data: data,
-      serializer: serializer,
       message: "#{action_name.capitalize.humanize} #{service_name}"
     )
   end
