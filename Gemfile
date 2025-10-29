@@ -7,7 +7,7 @@ gem 'bootsnap', require: false
 gem 'importmap-rails'
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
-gem 'rails', '~> 7.2.2', '>= 7.2.2.1'
+gem 'rails', '~> 7.2.3'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
